@@ -829,6 +829,16 @@ public final class VelocityConfiguration implements ProxyConfig {
     return advanced.getKickAfterRateLimitedCommands();
   }
 
+  @Override
+  public int getMaxPacketsPerSecond() {
+    return advanced.getMaxPacketsPerSecond();
+  }
+
+  @Override
+  public int getMaxPacketsDataPerSecond() {
+    return advanced.getMaxPacketDataPerSecond();
+  }
+
   /**
    * Returns whether the PROXY protocol is enabled for incoming connections.
    *
@@ -2037,6 +2047,18 @@ public final class VelocityConfiguration implements ProxyConfig {
     private int kickAfterRateLimitedTabCompletes = 0;
 
     /**
+     * Maximum number of packets allowed from a single connection per second.
+     */
+    @Expose
+    private int maxPacketsPerSecond = 1 << 12;
+
+    /**
+     * Maximum total size (in bytes) of packets allowed from a single connection per second.
+     */
+    @Expose
+    private int maxPacketDataPerSecond = 1 << 25;
+
+    /**
      * Whether to allow illegal characters in player chat messages.
      * May improve compatibility with older or modified clients.
      */
@@ -2116,6 +2138,8 @@ public final class VelocityConfiguration implements ProxyConfig {
         this.kickAfterRateLimitedCommands = config.getIntOrElse("kick-after-rate-limited-commands", 0);
         this.tabCompleteRateLimit = config.getIntOrElse("tab-complete-rate-limit", 10);
         this.kickAfterRateLimitedTabCompletes = config.getIntOrElse("kick-after-rate-limited-tab-completes", 0);
+        this.maxPacketsPerSecond = config.getIntOrElse("max-packets-per-second", 1 << 12);
+        this.maxPacketDataPerSecond = config.getIntOrElse("max-packet-data-per-second", 1 << 25);
         this.allowIllegalCharactersInChat = config.getOrElse("allow-illegal-characters-in-chat", false);
         this.serverBrand = config.getOrElse("server-brand", "{backend-brand} ({proxy-brand})");
         this.fallbackVersionPing = config.getOrElse("fallback-version-ping", "{proxy-brand} {protocol-min}-{protocol-max}");
@@ -2218,6 +2242,14 @@ public final class VelocityConfiguration implements ProxyConfig {
       return kickAfterRateLimitedTabCompletes;
     }
 
+    public int getMaxPacketsPerSecond() {
+      return maxPacketsPerSecond;
+    }
+
+    public int getMaxPacketDataPerSecond() {
+      return maxPacketDataPerSecond;
+    }
+
     public boolean isAllowIllegalCharactersInChat() {
       return allowIllegalCharactersInChat;
     }
@@ -2266,6 +2298,8 @@ public final class VelocityConfiguration implements ProxyConfig {
           + ", kickAfterRateLimitedCommands=" + kickAfterRateLimitedCommands
           + ", tabCompleteRateLimit=" + tabCompleteRateLimit
           + ", kickAfterRateLimitedTabCompletes=" + kickAfterRateLimitedTabCompletes
+          + ", maxPacketsPerSecond=" + maxPacketsPerSecond
+          + ", maxPacketDataPerSecond" + maxPacketDataPerSecond
           + ", allowIllegalCharactersInChat=" + allowIllegalCharactersInChat
           + '}';
     }

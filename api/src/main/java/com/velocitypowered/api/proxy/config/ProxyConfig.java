@@ -226,4 +226,18 @@ public interface ProxyConfig {
   default boolean isKickOnTabCompleteRateLimit() {
     return getKickAfterRateLimitedTabCompletes() > 0;
   }
+
+  /**
+   * Get the maximum number of packets that can be sent per second.
+   *
+   * @return the maximum packets per second
+   */
+  int getMaxPacketsPerSecond();
+
+  /**
+   * Get the maximum packet data size that can be sent per second.
+   *
+   * @return the maximum data packets per second
+   */
+  int getMaxPacketsDataPerSecond();
 }
