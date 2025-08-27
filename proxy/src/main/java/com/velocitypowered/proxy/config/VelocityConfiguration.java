@@ -2503,18 +2503,6 @@ public final class VelocityConfiguration implements ProxyConfig {
     @Expose
     private @Nullable String proxyId;
 
-    /**
-     * Connection timeout in seconds for Redis operations.
-     */
-    @Expose
-    private int connectionTimeout;
-
-    /**
-     * Read timeout in seconds for Redis operations.
-     */
-    @Expose
-    private int readTimeout;
-
     private Redis(final CommentedConfig config) {
       if (config == null) {
         return;
@@ -2537,9 +2525,6 @@ public final class VelocityConfiguration implements ProxyConfig {
       if (this.proxyId == null || this.proxyId.isEmpty()) {
         this.proxyId = null;
       }
-
-      this.connectionTimeout = config.getIntOrElse("connection-timeout", 5);
-      this.readTimeout = config.getIntOrElse("read-timeout", 3);
     }
 
     /**
@@ -2615,24 +2600,6 @@ public final class VelocityConfiguration implements ProxyConfig {
       return proxyId;
     }
 
-    /**
-     * Gets the connection timeout in seconds for Redis operations.
-     *
-     * @return the connection timeout in seconds
-     */
-    public int getConnectionTimeout() {
-      return connectionTimeout;
-    }
-
-    /**
-     * Gets the read timeout in seconds for Redis operations.
-     *
-     * @return the read timeout in seconds
-     */
-    public int getReadTimeout() {
-      return readTimeout;
-    }
-
     @Override
     public String toString() {
       return "Redis{"
@@ -2643,8 +2610,6 @@ public final class VelocityConfiguration implements ProxyConfig {
           // password excluded for security
           + ", useSsl=" + useSsl
           + ", maxConcurrentConnections=" + maxConcurrentConnections
-          + ", connectionTimeout=" + connectionTimeout
-          + ", readTimeout=" + readTimeout
           + '}';
     }
   }
