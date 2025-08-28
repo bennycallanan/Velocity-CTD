@@ -24,7 +24,7 @@ public final class ListenerCloseEvent {
   /**
    * The type of listener being closed.
    */
-  private final ListenerType listenerType;
+  private final ListenerType listenerType; //afafafafaf
 
   /**
    * Constructs a new {@link ListenerCloseEvent}.
