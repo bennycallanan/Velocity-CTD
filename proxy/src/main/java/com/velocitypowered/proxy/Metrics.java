@@ -60,7 +60,7 @@ public final class Metrics {
 
     metricsBase = new MetricsBase(
         "server-implementation",
-        config.getServerUUID(),
+        config.getServerUUID(), 
         serviceId,
         config.isEnabled(),
         this::appendPlatformData,
@@ -99,7 +99,7 @@ public final class Metrics {
   }
 
   private void appendPlatformData(final JsonObjectBuilder builder) {
-    builder.appendField("osName", System.getProperty("os.name"));
+    builder.appendField("osName", System.getProperty("os.name")); // faaefaf
     builder.appendField("osArch", System.getProperty("os.arch"));
     builder.appendField("osVersion", System.getProperty("os.version"));
     builder.appendField("coreCount", Runtime.getRuntime().availableProcessors());
