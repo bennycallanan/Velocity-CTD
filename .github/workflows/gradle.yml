@@ -5,7 +5,7 @@ name: Java CI with Gradle
 on:
   push:
     branches:
-      - libdeflate
+      - ci-workflow-changes
 
 jobs:
   build:
