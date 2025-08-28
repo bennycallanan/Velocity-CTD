@@ -25,11 +25,20 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
+    - name: Generate Release Tag
+      id: release_tag
+      run: |
+        # Generate a unique tag based on timestamp and commit SHA
+        TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+        SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+        echo "tag=build-$TIMESTAMP-$SHORT_SHA" >> $GITHUB_OUTPUT
+        echo "Generated tag: build-$TIMESTAMP-$SHORT_SHA"
+
     - name: Upload Velocity
       uses: marvinpinto/action-automatic-releases@master
       with:
-        title: "Velocity-CTD"
-        automatic_release_tag: "Releases"
+        title: "Velocity-CTD Build ${{ steps.release_tag.outputs.tag }}"
+        automatic_release_tag: "${{ steps.release_tag.outputs.tag }}"
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         files: "*/build/libs/*.jar"
         prerelease: false
