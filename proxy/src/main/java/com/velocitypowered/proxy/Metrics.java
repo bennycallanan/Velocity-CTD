@@ -65,7 +65,7 @@ public final class Metrics {
         config.isEnabled(),
         this::appendPlatformData,
         jsonObjectBuilder -> { /* NOP */ },
-        null,
+        null, //test
         () -> true,
         logger::warn,
         logger::info,
