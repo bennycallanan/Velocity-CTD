@@ -99,7 +99,7 @@ public final class Metrics {
   }
 
   private void appendPlatformData(final JsonObjectBuilder builder) {
-    builder.appendField("osName", System.getProperty("os.name")); // faaefaf
+    builder.appendField("osName", System.getProperty("os.name"));
     builder.appendField("osArch", System.getProperty("os.arch"));
     builder.appendField("osVersion", System.getProperty("os.version"));
     builder.appendField("coreCount", Runtime.getRuntime().availableProcessors());
