@@ -37,7 +37,7 @@ jobs:
     - name: Upload Velocity
       uses: marvinpinto/action-automatic-releases@master
       with:
-        title: "Velocity-CTD Build ${{ steps.release_tag.outputs.tag }}"
+        title: "Velocity-CTD"
         automatic_release_tag: "${{ steps.release_tag.outputs.tag }}"
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         files: "*/build/libs/*.jar"
