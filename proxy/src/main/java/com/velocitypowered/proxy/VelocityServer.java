@@ -179,7 +179,7 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
               .serializer().getAdapter(Component.class)
       )
       .registerTypeHierarchyAdapter(Favicon.class, FaviconSerializer.INSTANCE)
-      .create();
+      .create(); //dafaf
 
   /**
    * A {@link Gson} instance for serializing server ping responses for Minecraft versions
